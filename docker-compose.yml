@@ -1,0 +1,22 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: winxclub
+      MYSQL_USER: bloom
+      MYSQL_PASSWORD: bloomPass
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: bloom
+      PMA_PASSWORD: bloomPass
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
