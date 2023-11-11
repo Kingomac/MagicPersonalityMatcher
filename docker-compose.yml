@@ -9,6 +9,10 @@ services:
       MYSQL_PASSWORD: bloomPass
     ports:
       - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+    networks:
+      - winxnet
   phpmyadmin:
     image: phpmyadmin:latest
     environment:
@@ -20,3 +24,8 @@ services:
       - "8080:80"
     depends_on:
       - mysql
+    networks:
+      - winxnet
+networks:
+  winxnet:
+    driver: bridge

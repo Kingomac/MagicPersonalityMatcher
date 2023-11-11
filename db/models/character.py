@@ -1,12 +1,10 @@
-from sqlalchemy import create_engine, Column, Integer, String, Sequence, Boolean, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine, Column, Integer, BigInteger, String, Sequence, Boolean, ForeignKey
 from sqlalchemy.orm import mapped_column,relationship
-
-Base = declarative_base()
+from .base import Base
 
 class Character(Base):
     __tablename__ = 'character'
-    id = mapped_column(primary_key=True)
+    id = mapped_column(BigInteger(),primary_key=True)
     name = mapped_column(String(200), nullable=False)
     image = mapped_column(String(200), nullable=False)
     serie_id = mapped_column(ForeignKey('serie.id'), nullable=False)
