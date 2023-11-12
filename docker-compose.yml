@@ -3,7 +3,7 @@ services:
   mysql:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: bloomPass
       MYSQL_DATABASE: winxclub
       MYSQL_USER: bloom
       MYSQL_PASSWORD: bloomPass
@@ -11,6 +11,12 @@ services:
       - "3306:3306"
     volumes:
       - ./data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 20s
+      timeout: 30s
+      retries: 10
+      start_period: 10s
     networks:
       - winxnet
   phpmyadmin:
@@ -22,6 +28,14 @@ services:
       PMA_PASSWORD: bloomPass
     ports:
       - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - winxnet
+  db_intialize:
+    build:
+      dockerfile: ./db_initialize/Dockerfile
+      context: .
     depends_on:
       - mysql
     networks:
