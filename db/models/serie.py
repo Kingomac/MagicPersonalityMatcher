@@ -4,7 +4,7 @@ from .base import Base
 
 class Serie(Base):
     __tablename__ = 'serie'
-    id = mapped_column(BigInteger(),primary_key=True)
+    id = mapped_column(BigInteger(),primary_key=True, autoincrement=True)
     name = mapped_column(String(200), nullable=False)
     image = mapped_column(String(200), nullable=False)
     personajes = relationship("Character", back_populates="serie")
