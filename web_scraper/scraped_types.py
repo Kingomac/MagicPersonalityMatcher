@@ -1,5 +1,4 @@
 from typing import TypedDict, Literal
-from db.models.serie import Serie
 
 
 class ScrapedCharacter(TypedDict):

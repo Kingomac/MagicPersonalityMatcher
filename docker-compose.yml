@@ -20,6 +20,8 @@ services:
     networks:
       - winxnet
   phpmyadmin:
+    profiles:
+      - dev
     image: phpmyadmin:latest
     environment:
       PMA_HOST: mysql
@@ -32,9 +34,11 @@ services:
       - mysql
     networks:
       - winxnet
-  db_intialize:
+  webscraping:
+    profiles:
+      - init
     build:
-      dockerfile: ./db_initialize/Dockerfile
+      dockerfile: ./web_scraper/Dockerfile
       context: .
     depends_on:
       - mysql

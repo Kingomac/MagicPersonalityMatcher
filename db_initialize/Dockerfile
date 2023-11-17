@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./db_initialize ./db_initialize
 COPY ./db ./db
 
-CMD ["python", "-u","-m", "db_initialize.initialize"]
+CMD ["python", "-m", "db_initialize.initialize"]

@@ -5,15 +5,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import FirefoxOptions, ChromeOptions, EdgeOptions, SafariOptions
-from scraped_types import ScrapedCharacter, ScrapedSerie
+from .scraped_types import ScrapedCharacter, ScrapedSerie
 
 
 def scrape(
-    url: str,
-    browser: Literal["Chrome", "Firefox", "Edge", "Safari"] = "Firefox",
-    options: Union[
-        ChromeOptions, FirefoxOptions, EdgeOptions, SafariOptions
-    ] = FirefoxOptions(),
+    url: str
 ):
     """
         This function will scrape the personality-database.com website and get name, image and personality of all the characters from a serie
@@ -28,7 +24,9 @@ def scrape(
     # browser.get('https://www.personality-database.com/profile?pid=2&cid=7&sub_cat_id=1064')
 
     # Use specified browser to open the url
-    browser = getattr(webdriver, browser)(options=options)
+    options = FirefoxOptions()
+    options.add_argument("--headless")
+    browser = webdriver.Firefox(options)
     browser.get(url)
     serie: ScrapedSerie = None
     characters: list[ScrapedCharacter] = []
