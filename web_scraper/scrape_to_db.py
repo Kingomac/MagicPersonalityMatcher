@@ -15,6 +15,7 @@ def save_scraped(session: Session, scraped_serie: ScrapedSerie, scraped_characte
     session.add(serie)
 
     # Create Characters and associate them with the serie
+    print("SCRAPED CHARACTERS: ", scraped_characters)
     for x in scraped_characters:
         character = Character(
             name=x["name"], image=x["image"], personality_str=x["personality"], serie=serie)
@@ -25,8 +26,7 @@ def save_scraped(session: Session, scraped_serie: ScrapedSerie, scraped_characte
 def scrape_to_db():
     # Initialize database
     engine = initialize_retry()
-    Session = sessionmaker(bind=engine)
-    session = Session()
+    session = Session(engine)
     # Get series from links.txt
     with open("web_scraper/links.txt", "r") as f:
         links = f.read().splitlines()

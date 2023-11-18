@@ -22,9 +22,10 @@ class Character(Base):
         Boolean(), nullable=False)  # True = T, False = F
     personality_jp: Mapped[bool] = mapped_column(
         Boolean(), nullable=False)  # True = J, False = P
-    serie_id: Mapped[int] = mapped_column(BigInteger(),
-                                          ForeignKey("serie.id"), nullable=False)
-    serie: Mapped["Serie"] = relationship("Serie", back_populates="characters")
+    # Relationship one to many with serie (this is child)
+    serie_id: Mapped[int] = mapped_column(
+        ForeignKey("serie.id", ondelete='SET NULL'), nullable=False)
+    serie: Mapped["Serie"] = relationship(back_populates="characters")
 
     def __init__(self, name, image, serie, personality_str: str):
         self.name = name

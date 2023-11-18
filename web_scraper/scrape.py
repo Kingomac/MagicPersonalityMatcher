@@ -25,7 +25,7 @@ def scrape(
 
     # Use specified browser to open the url
     options = FirefoxOptions()
-    options.add_argument("--headless")
+    # options.add_argument("--headless")
     browser = webdriver.Firefox(options)
     browser.get(url)
     serie: ScrapedSerie = None
@@ -59,6 +59,7 @@ def scrape(
                     EC.presence_of_all_elements_located(
                         (By.CLASS_NAME, "profile-card"))
                 )
+                print("number of elements: ", len(elements))
                 # Get the container to check changes on it
                 container = WebDriverWait(browser, 10).until(
                     EC.presence_of_element_located(
@@ -66,16 +67,18 @@ def scrape(
                 )
                 # Iterate over all cards and get the information
                 for el in elements:
+                    print("checking out: " + el.text)
                     character_name = el.find_element(
-                        By.CLASS_NAME, "name").text
-                    character_avatar = el.find_element(
-                        By.TAG_NAME, "img"
-                    ).get_attribute("src")
-                    character_personality = el.find_element(
-                        By.CLASS_NAME, "description"
-                    ).text
-                    characters.append(ScrapedCharacter(
-                        name=character_name, image=character_avatar, personality=character_personality))
+                        By.CLASS_NAME, "info-name").text
+                    # character_avatar = el.find_element(
+                    #    By.TAG_NAME, "img"
+                    # ).get_attribute("src")
+                    # character_personality = el.find_element(
+                    #    By.CLASS_NAME, "description"
+                    # ).text
+                    # print("character: ", character_name)
+                    # characters.append(ScrapedCharacter(
+                    #    name=character_name, image=character_avatar, personality=character_personality))
                 elements = WebDriverWait(browser, 10).until(
                     EC.presence_of_all_elements_located(
                         (By.CLASS_NAME, "rc-pagination-item")
@@ -107,4 +110,6 @@ def scrape(
     finally:
         print("Scrape reached end")
         browser.quit()
+        print("serie: ", serie)
+        print("characters: ", characters)
         return (serie, characters)

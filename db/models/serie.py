@@ -10,5 +10,6 @@ class Serie(Base):
         BigInteger(), primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(200), nullable=False)
     image: Mapped[str] = mapped_column(String(200), nullable=False)
+    # Relationship one to many with characters (this is parent)
     characters: Mapped[List["Character"]] = relationship(
-        "Character", back_populates="serie")
+        back_populates="serie", passive_deletes='all')
