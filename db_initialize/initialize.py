@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from db.models import Base
 from threading import Timer
+from db.models import Serie, Character
 
 
 def initialize_retry():
