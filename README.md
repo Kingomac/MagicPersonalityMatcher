@@ -18,7 +18,7 @@
 └── requirements.txt
 ```
 
-- `bakend`
+- `backend`
 - `data`: reservado para los datos de la base de datos `MySQL`, es un volumen de `/var/lib/myqsl` del contendor.
 - `db`: contiene el modelo y ORM de la base de datos como un módulo Python.
 - `db_initialize`: módulo Python para conexión e inicialización de la base de datos.
@@ -47,18 +47,18 @@ $ docker-compose up
 
 La inicialización del proyecto se realiza en las siguientes etapas:
 - Poblado de la base de datos con `web_scraper`
-- Modelo de IA
+- Crear y entrenar modelo IA
 - Backend
 - Frontend
 
-### Inicialización de la base de datos
+### Poblado de la base de datos con `web_scraper`
 
 Para descargar información de las series usando el `web_scraper` hay que volcar los links de las páginas a utilizar en `web_scraper/links.txt`. Luego se ejecuta el script usando Docker con `docker-compose --profile dev --profile init up --build`. Este script crea la base de datos, las tablas e inserta la información obtenida del web scraping.
 
 > ⚠️ Las webs son propensas a cambios, de hecho, durante el desarrollo del script de inicialización (1 semana), la web cambió el nombre de una clase para un elemento HTML, lo que supuso reexaminar todo el código para ajustarlo a los nuevos cambios.
 
 
-### Crear y entrenar modelo
+### Crear y entrenar modelo IA
 
 En este paso se ejecutarán los notebooks, se debe seguir el siguiente orden obteniendo los siguentes resultados:
 1. [Crear dataset](notebooks/crear_dataset.ipynb): `dataset_definitivo.csv`.
