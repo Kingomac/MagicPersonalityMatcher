@@ -1,0 +1,1 @@
+from .text_to_personality import TextToPersonality
