@@ -90,5 +90,14 @@ Requiere usar el modelo de IA, por tanto require el modelo entrenado usando los 
 
 
 
+## Demo
+
+Hay una demo para probar el modelo de Texto de Personalidad, que a partir de texto que se le escribe en consola, lo clasifica y muestra la personalidad predecida. Se puede ejecutar con el siguiente comando:
+
+```shell
+python -m demo.text_to_personality_demo
+```
+
+> No requiere que la base de datos esté funcionando, pero si require la carpeta `ml_model` con `bow.lzma` y `model.lzma`
 
 
