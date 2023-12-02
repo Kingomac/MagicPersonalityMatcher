@@ -28,12 +28,3 @@ class TextToPersonality:
         preprocessed = TextToPersonality.bow.transform([text])
         return TextToPersonality.NUM_PERSONALITY[TextToPersonality.model.predict(preprocessed)[0]]
 
-
-
-if __name__ == '__main__':
-    prep = TextToPersonality.bow.transform([
-        "aaaaaaaa",
-        "bbbbbbbbbb",
-        "susoputa"
-    ])
-    print(TextToPersonality.model.predict(prep))
