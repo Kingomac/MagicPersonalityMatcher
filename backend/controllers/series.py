@@ -15,7 +15,7 @@ async def get_series():
             stmt = select(Serie).order_by(Serie.name)
             return [x.__dict__ for x in session.scalars(stmt)]
         
-@router.get("/{serie_id}/characters/personality/{personality}")
+@router.get("/{serie_id}/characters/{personality}")
 async def get_characters(serie_id: int, personality: str):
     print("serie_id:",serie_id)
     print("personality:",personality)
