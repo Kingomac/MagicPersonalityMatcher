@@ -40,6 +40,8 @@ services:
     build:
       dockerfile: ./web_scraper/Dockerfile
       context: .
+    volumes:
+      - ./:/usr/src/app
     depends_on:
       - mysql
     networks:
