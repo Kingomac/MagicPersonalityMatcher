@@ -24,18 +24,24 @@ def save_scraped(session: Session, scraped_serie: ScrapedSerie, scraped_characte
 
 def scrape_to_db():
     # Initialize database
+    print("SCRAPING TO DB")
     engine = initialize_retry()
-    session = Session(bind=engine)
+    session = sessionmaker(bind=engine)
     # Get series from links.txt
     with open("web_scraper/links.txt", "r") as f:
         links = f.read().splitlines()
+    print("READ LINKS: ", links)
     # Scrape each serie
     for link in links:
         scraped_serie, scraped_characters = scrape(link)
-        save_scraped(session, scraped_serie, scraped_characters)
-
-    session.close()
+        ss = session()
+        save_scraped(ss, scraped_serie, scraped_characters)
 
 
 if __name__ == "__main__":
-    scrape_to_db()
+    print("pollllllllaaaaaaaaaaaaaaaaaaaaaaaaaaas")
+    try:
+        scrape_to_db()
+    except Exception as e:
+        print("ERROR: ", e)
+        print(e.with_traceback())
