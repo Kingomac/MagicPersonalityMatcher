@@ -1,3 +1,5 @@
+ml_model/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -9,6 +11,7 @@ __pycache__/
 
 # Database
 data/
+datasets/
 
 # Distribution / packaging
 .Python
