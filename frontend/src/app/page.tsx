@@ -1,10 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import { Box, Button, Card, CardBody, CardFooter, CardHeader, Center, Grid, GridItem, HStack, Heading, Modal, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Spacer, Text, Textarea, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Card, CardBody, CardFooter, CardHeader, Center, Grid, GridItem, HStack, Heading, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Spacer, Spinner, Text, Textarea, VStack, useDisclosure } from '@chakra-ui/react'
 import { ChangeEvent, useState } from 'react'
 import { API_URL } from '../../config'
 import { useRouter } from 'next/navigation'
+import loadingTexts from './data/loadingTexts.json'
 
 export default function Home() {
 
@@ -19,12 +20,14 @@ export default function Home() {
   ))
 
   const [texto, setTexto] = useState('')
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleTextareaInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTexto(e.target.value)
   }
 
   const handleTransformButtonClick = async () => {
+    onOpen()
     const resp = await fetch(`${API_URL}/personality`, {
       method: 'POST',
       body: JSON.stringify({ text: texto }),
@@ -33,7 +36,9 @@ export default function Home() {
       }
     })
     const data = await resp.json() as { personality: string }
-    router.push(`/personality/${data.personality}`)
+    setTimeout(() => {
+      router.push(`/personality/${data.personality}`)
+    }, Math.random() * 3000 + 1000);
   }
 
   return (
@@ -57,6 +62,18 @@ export default function Home() {
           <Text>prueba</Text>
         </GridItem>
       </Grid>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Cargando...</ModalHeader>
+          <ModalBody>
+            <VStack>
+              <Spinner />
+              <Text>{loadingTexts[Math.floor(Math.random() * loadingTexts.length)]}</Text>
+            </VStack>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </main>
   )
 }
