@@ -8,12 +8,11 @@ from db.util import personality_to_text, text_to_personality
 
 router = APIRouter(prefix="/series")
 
-
 @router.get("/")
-async def get_series():
+async def get_series(offset: int = 0, limit: int = 10):
     with create_session() as session:
         with session.begin():
-            stmt = select(Serie).order_by(Serie.name)
+            stmt = select(Serie).order_by(Serie.name).limit(limit).offset(offset)
             return [x.__dict__ for x in session.scalars(stmt)]
 
 @router.get("/any/characters/{personality}")
@@ -22,8 +21,8 @@ async def get_any_characters(personality: str):
     pbools = text_to_personality(personality)
     with create_session() as session:
         with session.begin():
-            stmt = select(Character).where(Character.personality_ie == pbools[0], Character.personality_sn == pbools[1], Character.personality_tf == pbools[2], Character.personality_jp == pbools[3]).order_by(func.random()).limit(5)
-            return [{ 'id': x.id, 'image': x.image, 'name': x.name, 'personality':personality_to_text(x) } for x in session.scalars(stmt)]        
+            stmt = select(Character).where(Character.personality_ie == pbools[0], Character.personality_sn == pbools[1], Character.personality_tf == pbools[2], Character.personality_jp == pbools[3]).order_by(func.random()).limit(6)
+            return [{ 'id': x.id, 'image': x.image, 'name': x.name, 'personality':personality_to_text(x), 'serie_name': x.serie.name } for x in session.scalars(stmt)]        
 
 @router.get("/{serie_id}/characters/{personality}")
 async def get_characters(serie_id: int, personality: str):
@@ -33,5 +32,13 @@ async def get_characters(serie_id: int, personality: str):
     pbools = text_to_personality(personality)
     with create_session() as session:
         with session.begin():
-            stmt = select(Character).where(Character.serie_id == serie_id, Character.personality_ie == pbools[0], Character.personality_sn == pbools[1], Character.personality_tf == pbools[2], Character.personality_jp == pbools[3])
+            stmt = select(Character).where(Character.serie_id == serie_id, Character.personality_ie == pbools[0], Character.personality_sn == pbools[1], Character.personality_tf == pbools[2], Character.personality_jp == pbools[3]).order_by(Character.name)
             return [{ 'id': x.id, 'image': x.image, 'name': x.name, 'personality':personality_to_text(x) } for x in session.scalars(stmt)]
+
+@router.get("/{serie_id}")
+async def get_serie(serie_id: int):
+    with create_session() as session:
+        with session.begin():
+            stmt = select(Serie).where(Serie.id == serie_id)
+            res = session.scalar(stmt)
+            return { 'id': res.id, 'name': res.name, 'image': res.image }
