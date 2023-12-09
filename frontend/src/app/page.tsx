@@ -50,7 +50,7 @@ export default function Home() {
         </GridItem>
         <GridItem order={{ base: 1, lg: 2 }}>
           <VStack marginTop={10} margin={10} textAlign="center">
-            <Heading as='h1' size='4xl'>Magic Personality Matcher</Heading>
+            <Heading as='h1' fontFamily="White Star" color="white" backgroundColor="#4cb3ce" padding={10} size='4xl'>Magic Personality Matcher</Heading>
             <Heading as="h2" size="lg" marginTop={50}>Determina tu personalidad en base al texto que escribes</Heading>
 
             <VStack spacing={10} marginTop={50}>
