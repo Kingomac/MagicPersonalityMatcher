@@ -1,4 +1,5 @@
 from sqlalchemy import select
+from sqlalchemy.sql import func
 from ..database import create_session
 from db.models import Serie, Character
 from fastapi import APIRouter
@@ -14,7 +15,16 @@ async def get_series():
         with session.begin():
             stmt = select(Serie).order_by(Serie.name)
             return [x.__dict__ for x in session.scalars(stmt)]
-        
+
+@router.get("/any/characters/{personality}")
+async def get_any_characters(personality: str):
+    personality = personality.upper()
+    pbools = text_to_personality(personality)
+    with create_session() as session:
+        with session.begin():
+            stmt = select(Character).where(Character.personality_ie == pbools[0], Character.personality_sn == pbools[1], Character.personality_tf == pbools[2], Character.personality_jp == pbools[3]).order_by(func.random()).limit(5)
+            return [{ 'id': x.id, 'image': x.image, 'name': x.name, 'personality':personality_to_text(x) } for x in session.scalars(stmt)]        
+
 @router.get("/{serie_id}/characters/{personality}")
 async def get_characters(serie_id: int, personality: str):
     print("serie_id:",serie_id)
