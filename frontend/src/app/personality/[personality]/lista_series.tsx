@@ -21,6 +21,7 @@ export default function ListaSeries({ personality }: { personality?: string }) {
     const [series, setSeries] = useState([] as Serie[])
 
     const fetchSeries = async (offset: number) => {
+        setIsLoading(true)
         const url = new URL(`${API_URL}/series`)
         url.searchParams.append('offset', offset.toString())
         console.log("fetching:", url.toString())
@@ -32,6 +33,7 @@ export default function ListaSeries({ personality }: { personality?: string }) {
                 }
             })
         const data = await req.json() as Serie[]
+        setIsLoading(false)
         return data
     }
     useEffect(() => {
@@ -63,12 +65,9 @@ export default function ListaSeries({ personality }: { personality?: string }) {
         }
     }, [boxRef.current])
 
-    if (isLoading)
-        return <Spinner />
-
     if (personality == undefined)
         return (
-            <SimpleGrid columns={{ "base": 2, "sm": 3, "md": 4, "lg": 5 }} spacing={4}>
+            <SimpleGrid columns={{ "base": 2, "sm": 3, "md": 4, "lg": 5 }} spacing={4} placeItems="center">
                 {
                     series.map((serie) => (
                         <Tooltip key={serie.id} label={serie.name} aria-label={serie.name}>
@@ -77,10 +76,11 @@ export default function ListaSeries({ personality }: { personality?: string }) {
                     ))
                 }
                 <Box width="100%" height={50} ref={boxRef}></Box>
+                {isLoading && <Spinner size="xl" />}
             </SimpleGrid>
         )
     return (
-        <SimpleGrid columns={{ "base": 2, "sm": 3, "md": 4, "lg": 5 }} spacing={4}>
+        <SimpleGrid columns={{ "base": 2, "sm": 3, "md": 4, "lg": 5 }} spacing={4} placeItems="center">
             {
                 series.map((serie) => (
                     <Tooltip key={serie.id} label={serie.name} aria-label={serie.name}>
@@ -91,6 +91,7 @@ export default function ListaSeries({ personality }: { personality?: string }) {
                 ))
             }
             <Box width="100%" height={50} ref={boxRef}></Box>
+            {isLoading && <Spinner size="xl" />}
         </SimpleGrid>
     )
 }
