@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from 'react'
 import { API_URL } from '../../config'
 import { useRouter } from 'next/navigation'
 import loadingTexts from './data/loadingTexts.json'
+import AnyCharacterList from './any_character_list'
 
 export default function Home() {
 
@@ -43,23 +44,23 @@ export default function Home() {
 
   return (
     <main>
-      <Grid templateColumns={{ base: "1fr", lg: "1fr 3fr 1fr" }} gridAutoFlow={{ base: "dense", lg: "column" }} gap={6}>
+      <Grid templateColumns={{ base: "1fr", lg: "1fr 3fr 1fr" }} gridAutoFlow={{ base: "dense", lg: "column" }} gap={6} margin={2}>
         <GridItem order={{ base: 2, lg: 1 }}>
           {cards}
         </GridItem>
         <GridItem order={{ base: 1, lg: 2 }}>
           <VStack marginTop={10} margin={10} textAlign="center">
             <Heading as='h1' size='4xl'>Magic Personality Matcher</Heading>
-            <Heading as="h2" size="lg">Determina tu personalidad en base al texto que escribes</Heading>
+            <Heading as="h2" size="lg" marginTop={50}>Determina tu personalidad en base al texto que escribes</Heading>
 
-            <VStack spacing={10}>
+            <VStack spacing={10} marginTop={50}>
               <Textarea cols={60} rows={10} onInput={handleTextareaInputChange} value={texto} placeholder="Escribe ⌨️ aquí el texto ✍️ que quieres usar para determinar 🧮 tu 🧚 personalidad 🧚. Pueden ser Tweets, WhatsApps, mensajes de Tuenti o cualquier cosa que se te ocurra 🤔" />
               <Button onClick={handleTransformButtonClick} colorScheme="teal" size="lg">Transformar</Button>
             </VStack>
           </VStack>
         </GridItem>
         <GridItem order={3}>
-          <Text>prueba</Text>
+          <AnyCharacterList limit={10} />
         </GridItem>
       </Grid>
       <Modal isOpen={isOpen} onClose={onClose}>

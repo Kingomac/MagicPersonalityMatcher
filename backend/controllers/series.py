@@ -1,5 +1,4 @@
-from sqlalchemy import select
-from sqlalchemy.sql import func
+from sqlalchemy import select, func
 from ..database import create_session
 from db.models import Serie, Character
 from fastapi import APIRouter

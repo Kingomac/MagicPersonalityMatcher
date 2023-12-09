@@ -1,6 +1,6 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.staticfiles import StaticFiles
-from .controllers import series,personality
+from .controllers import series,personality,characters
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -21,6 +21,7 @@ async def main():
 
 router.include_router(personality.router)
 router.include_router(series.router)
+router.include_router(characters.router)
 app.include_router(router)
 app.add_middleware(
     CORSMiddleware,
