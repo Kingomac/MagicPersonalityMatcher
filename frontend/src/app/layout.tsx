@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, Heading } from '@chakra-ui/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className={inter.className}>
         <ChakraProvider>
           {children}

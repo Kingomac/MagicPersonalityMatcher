@@ -4,6 +4,8 @@ import { Badge, Divider, Heading, SimpleGrid, Text, VStack } from "@chakra-ui/re
 import significadoLetras from "../../data/personality/letras.json"
 import descripciones from "../../data/personality/descripciones.json"
 import ListaSeries from "./lista_series";
+import ListaPersonajes from "./lista_personajes";
+import Link from "next/link";
 
 export default function Personality({ params }: { params: { personality: string } }) {
 
@@ -25,9 +27,11 @@ export default function Personality({ params }: { params: { personality: string 
                 <Text>{descripcion.body}</Text>
                 <Divider margin={5} />
                 <Heading as="h2" size="lg" textAlign="center">Estos son algunos personajes {params.personality}</Heading>
+                <ListaPersonajes personalidad={params.personality} />
                 <Divider margin={5} />
                 <Heading as="h2" size="lg" textAlign="center">¿Quieres ver qué personajes {params.personality} hay en una serie específica?</Heading>
-                <ListaSeries />
+                <ListaSeries personality={params.personality} />
+                <Link href="/">Volver a la página principal</Link>
             </VStack>
         </main>
     )
