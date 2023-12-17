@@ -18,7 +18,7 @@ export default extendTheme({
         global: {
             // styles for the `body`
             body: {
-                bg: 'url("/fondo.webp")',
+                bg: 'white',//'url("/fondo.webp")',
             },
             // styles for the `a`
             a: {

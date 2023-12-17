@@ -24,7 +24,7 @@ export default function Personality({ params }: { params: { personality: string 
                     {significados}
                 </SimpleGrid>
                 <Heading marginTop={10} as="h3">{descripcion.title}</Heading>
-                <Text>{descripcion.body}</Text>
+                <Text textAlign="justify">{descripcion.body}</Text>
                 <Divider margin={5} />
                 <Heading as="h2" size="lg" textAlign="center">Estos son algunos personajes {params.personality}</Heading>
                 <ListaPersonajes personalidad={params.personality} />

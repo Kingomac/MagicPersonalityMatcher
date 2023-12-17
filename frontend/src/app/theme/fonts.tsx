@@ -8,7 +8,7 @@ const Fonts = () => (
             font-style: normal;
             font-weight: 700;
             font-display: swap;
-            src: url('./white-star.woff2') format('woff2');
+            src: url('/white-star.woff2') format('woff2');
         }
         /* latin */
         @font-face {
