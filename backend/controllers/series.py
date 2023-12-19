@@ -8,10 +8,10 @@ from db.util import personality_to_text, text_to_personality
 router = APIRouter(prefix="/series")
 
 @router.get("/")
-async def get_series(offset: int = 0, limit: int = 10):
+async def get_series():
     with create_session() as session:
         with session.begin():
-            stmt = select(Serie).order_by(Serie.name).limit(limit).offset(offset)
+            stmt = select(Serie).order_by(Serie.name)
             return [x.__dict__ for x in session.scalars(stmt)]
 
 @router.get("/any/characters/{personality}")
