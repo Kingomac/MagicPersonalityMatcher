@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Center, Grid, GridItem, HStack, Heading, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Spacer, Spinner, Text, Textarea, VStack, useDisclosure } from '@chakra-ui/react'
 import { ChangeEvent, useState } from 'react'
 import { API_URL } from '../../config'

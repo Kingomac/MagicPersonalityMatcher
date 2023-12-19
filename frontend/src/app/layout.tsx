@@ -15,6 +15,10 @@ export default function RootLayout({
 
   return (
     <html lang="es">
+      <head>
+        <title>Magic Personality Matcher</title>
+        <meta name="description" content="Determina tu personalidad en base al texto que escribes" />
+      </head>
       <body className={inter.className}>
         <ChakraProvider theme={theme}>
           <Fonts />
