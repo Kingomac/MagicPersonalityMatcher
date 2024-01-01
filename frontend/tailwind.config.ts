@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       gridTemplateColumns: {
         'auto-fit': 'repeat(auto-fit, minmax(250px, 1fr))',
-        '3-big-center': '1fr 2fr 1fr'
+        '3-big-center': '1fr 4fr 1fr'
       },
       colors: {
         'azul-claro': '#4cb3ce',
@@ -21,6 +21,15 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 0.5s ease-in-out",
+      }
     },
   },
   plugins: [],

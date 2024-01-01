@@ -20,7 +20,7 @@ export default async function AnyCharacter() {
     return (
         <Fragment>
             {characters.map((char, i) => (
-                <article key={i} className="grid grid-cols-2 border border-gray-200 p-4 shadow-lg">
+                <article key={i} className="grid grid-cols-[1fr_3fr] border border-gray-200 p-4 shadow-lg">
                     <Image className="rounded-full" width={50} height={50} src={STATIC_CONTENT_URL + char.image} alt={char.name} />
                     <div>
                         <h3>{char.name}</h3>
