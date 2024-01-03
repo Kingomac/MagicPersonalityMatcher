@@ -32,7 +32,7 @@ export default function TextDemo() {
         const data = await resp.json() as { personality: string }
         setTimeout(() => {
             router.push(`/personality/${data.personality}`)
-        }, Math.random() * 3000 + 100000);
+        }, Math.random() * 3000 + 1000);
     }
 
     return (
