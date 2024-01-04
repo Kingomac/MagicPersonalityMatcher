@@ -4,7 +4,7 @@ import localFont from 'next/font/local'
 import { API_URL } from '@/config'
 import { CharacterWithSerieName } from '@/types'
 
-const font = localFont({ src: './fonts/white-star.woff2' })
+const font = localFont({ src: './fonts/white-star.otf' })
 
 
 async function getCharacters() {
