@@ -18,8 +18,8 @@ async function getCharacters() {
 
 export default async function Home() {
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-3-big-center gap-4 md:gap-8 lg:gap-12">
-      <section className='order-2 lg:order-1 m-1'>
+    <main className="grid grid-cols-1 lg:grid-cols-3-big-center gap-4 md:gap-8 lg:gap-12 justify-items-center">
+      <section className='order-2 lg:order-1 lg:justify-self-start m-1'>
         <h1>heyy</h1>
       </section>
       <section className='flex flex-col items-center gap-2 order-1 lg:order-2 m-1'>
@@ -27,7 +27,7 @@ export default async function Home() {
         <h2 className='text-center mb-10 text-xl leading-loose'>Determina tu personalidad en base al texto que escribes</h2>
         <TextDemo />
       </section>
-      <section className='flex flex-col gap-2 order-3 lg:justify-self-end m-2 lg:m-2 md:mx-5'>
+      <section className='flex flex-col gap-2 order-3 lg:justify-self-end m-2'>
         <CharacterList characters={await getCharacters()} />
       </section>
     </main>

@@ -37,7 +37,7 @@ export default function TextDemo() {
 
     return (
         <Fragment>
-            <textarea onInput={handleTextareaInputChange} className="w-1/2 h-96 p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200" placeholder="Escribe ⌨️ aquí el texto ✍️ que quieres usar para determinar 🧮 tu 🧚 personalidad 🧚. Pueden ser Tweets, WhatsApps, mensajes de Tuenti o cualquier cosa que se te ocurra 🤔" />
+            <textarea onInput={handleTextareaInputChange} className="w-full h-96 p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200" placeholder="Escribe ⌨️ aquí el texto ✍️ que quieres usar para determinar 🧮 tu 🧚 personalidad 🧚. Pueden ser Tweets, WhatsApps, mensajes de Tuenti o cualquier cosa que se te ocurra 🤔" />
             <button className="bg-azul-claro text-white px-5 py-3 rounded font-bold hover:bg-azul-claro-hover" onClick={handleTransformButtonClick}>Transformar</button>
             <dialog ref={modalRef} className="rounded backdrop:bg-gray-400 backdrop:bg-opacity-50 open:animate-fade-in">
                 <div className="bg-white p-6 rounded shadow-lg max-w-sm mx-auto items-center flex flex-col">
