@@ -1,6 +1,8 @@
-import { API_URL } from "@/config"
+import CharacterList from "@/components/character/character_list"
+import { API_URL, STATIC_CONTENT_URL } from "@/config"
 import { Character, Serie } from "@/types"
 import localFont from "next/font/local"
+import Image from "next/image"
 
 const whiteStar = localFont({ src: '../../../fonts/white-star.otf' })
 
@@ -19,8 +21,19 @@ export default async function SeriePersonality({ params }: { params: { personali
     const [personajes, serie] = await Promise.all([fetchPersonajes(params.serie_id, params.personality), fetchDatosSerie(params.serie_id)])
 
     return (
-        <main>
-            <h1 className={`${whiteStar.className} text-4xl`}>{serie.name}</h1>
+        <main className="bg-gradient-to-b min-h-[100vh] from-azul-claro from-10% via-azul-claro via-40% to-stone-200 to-80% h-full flex flex-col items-center gap-5">
+            <div className="border-solid border-white border-2 rounded flex flex-col items-center border-opacity-50 bg-white bg-opacity-20 m-2">
+                <h1 className={`${whiteStar.className} text-white text-6xl p-10`}>Personajes {params.personality} de</h1>
+                <h1 className={`${whiteStar.className} text-white text-6xl p-10 bg text-center leading-loose`}>{serie.name}</h1>
+            </div>
+            <section className="flex flex-row flex-wrap gap-5 justify-center m-5 bg-white bg-opacity-30 p-5 rounded shadow-lg md:max-w-3xl">
+                {personajes.map((pers, i) => (
+                    <article className="flex flex-col items-center gap-2 bg-white bg-opacity-50 p-2 rounded shadow-lg w-[200px]" key={i}>
+                        <Image className="rounded-full shadow-lg" width={100} height={100} src={`${STATIC_CONTENT_URL}${pers.image}`} alt={pers.name} />
+                        <h2 className={`${whiteStar.className} text-gray-500 text-2xl p-3 bg-white rounded bg-opacity-20`}>{pers.name}</h2>
+                    </article>
+                ))}
+            </section>
         </main>
     )
 
