@@ -1,34 +1,34 @@
 {
     "I": {
         "text": "Introvertido",
-        "color": "#FFFFCC"
+        "color": "rojo-200"
     },
     "E": {
         "text": "Extrovertido",
-        "color": "#BFEFFF"
+        "color": "morado-200"
     },
     "S": {
         "text": "Sensible",
-        "color": "#CCFFCC"
+        "color": "amarillo-200"
     },
     "N": {
         "text": "Intuitivo",
-        "color": "#FFCCFF"
+        "color": "verde-200"
     },
     "T": {
         "text": "Pensador",
-        "color": "#FFDAB9"
+        "color": "naranja-200"
     },
     "F": {
         "text": "Emocional",
-        "color": "#F0E6FA"
+        "color": "azul-200"
     },
     "J": {
         "text": "Juicioso",
-        "color": "#B0E0E6"
+        "color": "cielo-200"
     },
     "P": {
         "text": "Perceptivo",
-        "color": "#FFB6C1"
+        "color": "rosa-200"
     }
 }

@@ -14,7 +14,16 @@ const config: Config = {
       },
       colors: {
         'azul-claro': '#4cb3ce',
-        'azul-claro-hover': '#3e96ad'
+        'azul-claro-hover': '#3e96ad',
+        'naranja-200': '#ffdab9',
+        'rosa-200': '#ffb6c1',
+        'cielo-200': '#b0e0e6',
+        'verde-200': '#98fb98',
+        'amarillo-200': '#ffffe0',
+        'morado-200': '#dda0dd',
+        'rojo-200': '#ff6347',
+        'azul-200': '#add8e6',
+
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
