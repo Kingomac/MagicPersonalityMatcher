@@ -1,8 +1,10 @@
 import joblib as jb
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 class TextToPersonality:
-    bow = jb.load("ml_model/bow.lzma") #pickle.load(open('ml_model/bow.pkl','rb'))
-    model = jb.load("ml_model/model.lzma")
+    bow: TfidfVectorizer = jb.load("ml_model/bow.lzma") #pickle.load(open('ml_model/bow.pkl','rb'))
+    model: RandomForestClassifier = jb.load("ml_model/model.lzma")
 
     NUM_PERSONALITY = {
     1: 'ISTJ',
@@ -22,9 +24,32 @@ class TextToPersonality:
     15: 'ENFJ',
     16: 'ENTJ'
 }
+    PERSONALITY_NUM = {
+    'ISTJ': 1,
+    'ISFJ': 2,
+    'INFJ': 3,
+    'INTJ': 4,
+    'ISTP': 5,
+    'ISFP': 6,
+    'INFP': 7,
+    'INTP': 8,
+    'ESTP': 9,
+    'ESFP': 10,
+    'ENFP': 11,
+    'ENTP': 12,
+    'ESTJ': 13,
+    'ESFJ': 14,
+    'ENFJ': 15,
+    'ENTJ': 16
+}
 
     @staticmethod
     def predict(text: str):
         preprocessed = TextToPersonality.bow.transform([text])
         return TextToPersonality.NUM_PERSONALITY[TextToPersonality.model.predict(preprocessed)[0]]
+    
+    def add_rating(text: str, personality: str):
+        preprocessed_text = TextToPersonality.bow.transform([text])
+        personality = TextToPersonality.PERSONALITY_NUM[personality]
+        TextToPersonality.model.fit(preprocessed_text, [personality])
 

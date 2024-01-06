@@ -11,6 +11,7 @@ export default function TextDemo() {
     const [loadingText, setLoadingText] = useState('')
 
     useEffect(() => {
+        sessionStorage.removeItem('token')
         setLoadingText(loadingTexts[Math.floor(Math.random() * loadingTexts.length)])
     }, [])
 
@@ -29,7 +30,8 @@ export default function TextDemo() {
                 'Content-Type': 'application/json'
             }
         })
-        const data = await resp.json() as { personality: string }
+        const data = await resp.json() as { personality: string, token: string }
+        sessionStorage.setItem('token', data.token)
         setTimeout(() => {
             router.push(`/personality/${data.personality}`)
         }, Math.random() * 3000 + 1000);

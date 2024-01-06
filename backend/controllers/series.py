@@ -2,7 +2,6 @@ from sqlalchemy import select, func
 from ..database import create_session
 from db.models import Serie, Character
 from fastapi import APIRouter
-from ..services import get_some_posts
 from db.util import personality_to_text, text_to_personality
 
 router = APIRouter(prefix="/series")

@@ -1,2 +1,1 @@
 from .text_to_personality import TextToPersonality
-from .get_user_posts import get_some_posts
