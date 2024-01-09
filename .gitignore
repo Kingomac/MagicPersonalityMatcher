@@ -10,7 +10,7 @@ __pycache__/
 *.so
 
 # Database
-./data/
+data/*
 datasets/
 
 # Distribution / packaging

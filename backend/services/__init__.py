@@ -1,1 +1,2 @@
 from .text_to_personality import TextToPersonality
+from .get_posts_examples import get_posts_examples

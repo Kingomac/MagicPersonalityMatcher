@@ -9,7 +9,7 @@ from sqlalchemy import select, func
 router = APIRouter(prefix="/characters")
 
 @router.get("/any")
-async def get_any(limit: str = 10, include_serie_name: bool = False):
+async def get_any(limit: str = 9, include_serie_name: bool = False):
     with create_session() as session:
         with session.begin():
             stmt = select(Character).order_by(func.random()).limit(limit)
