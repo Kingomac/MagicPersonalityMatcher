@@ -1,0 +1,53 @@
+actor Usuario
+
+activate Usuario
+activate Frontend
+activate Next.js Server
+Frontend->Next.js Server:http(GET, /)
+Frontend<--Next.js Server:paginaPrincipal
+Usuario->Frontend:texto
+deactivate Next.js Server
+activate REST API
+Frontend->REST API:clasificar(texto)
+activate Modelo IA
+
+REST API->Modelo IA:clasificar(texto)
+REST API<--Modelo IA:personalidad
+Frontend<--REST API:personalidad
+deactivate Modelo IA
+Usuario<--Frontend:personalidad
+deactivate REST API
+activate Next.js Server
+Frontend->Next.js Server:http(GET /personalidad)
+activate REST API
+Next.js Server->REST API:http(GET /personajes/personalidad)
+activate Base de datos
+REST API->Base de datos:getPersonajes(personalidad)
+Base de datos-->REST API:personaje[]
+REST API-->Next.js Server:personaje[]
+deactivate Base de datos
+Next.js Server-->Frontend:personaje[]
+deactivate REST API
+Frontend-->Usuario:personaje[]
+deactivate Next.js Server
+
+Usuario->Frontend:valoracion
+activate REST API
+Frontend->REST API:registrar(valoracion)
+activate Modelo IA
+REST API->Modelo IA:registrar(valoracion)
+Usuario->Frontend:seleccionar(serie)
+deactivate Modelo IA
+activate Next.js Server
+Frontend->Next.js Server:http(GET, /personalidad/serie)
+Next.js Server->REST API:getPersonajes(personalidad, serie)
+activate Base de datos
+REST API->Base de datos:getPersonajes(personalidad,serie)
+Base de datos-->REST API:personaje[]
+REST API-->Next.js Server:personaje[]
+deactivate Base de datos
+Next.js Server-->Frontend:personaje[]
+Frontend-->Usuario:personaje[]
+
+
+
