@@ -12,6 +12,7 @@ import time
 from threading import Timer
 from slugify import slugify
 
+
 def save_image(url: str, filename: str):
     """
         This function will save an image from a url to the specified filename
@@ -28,6 +29,7 @@ def save_image(url: str, filename: str):
     except Exception as e:
         print(f"ERROR SAVING IMAGE ({url}): ", e)
 
+
 def name_to_filename(name: str):
     """
         This function will convert a string to a valid filename
@@ -35,7 +37,7 @@ def name_to_filename(name: str):
         :return: The converted string
     """
     return slugify(name)
-    #return name.replace(" ", "_").replace('(', '').replace(')', '').lower()
+    # return name.replace(" ", "_").replace('(', '').replace(')', '').lower()
 
 
 def scrape(url: str):
@@ -66,7 +68,7 @@ def scrape(url: str):
                     )
                     .text
                 )
-                print("SERIEEEEE NAME: ", serie_name)
+                print("SERIE NAME: ", serie_name)
                 # Get serie cover art image
                 cover_art = (
                     WebDriverWait(browser, 10)
@@ -86,21 +88,24 @@ def scrape(url: str):
                 )
                 print("number of elements: ", len(elements))
                 try:
-                    os.mkdir(f"backend/static/character/{name_to_filename(serie_name)}")
+                    os.mkdir(
+                        f"backend/static/character/{name_to_filename(serie_name)}")
                 except FileExistsError:
                     print("Directory already exists")
-
 
                 def scroll_page(browser, actual_height, page_height):
                     if actual_height >= page_height:
                         return
-                    browser.execute_script(f"window.scrollBy(0, {actual_height})")
+                    browser.execute_script(
+                        f"window.scrollBy(0, {actual_height})")
                     new_height = actual_height + 100  # Ajusta la cantidad de desplazamiento aquí
-                    timer = Timer(1, scroll_page, args=(browser, new_height, page_height))
+                    timer = Timer(1, scroll_page, args=(
+                        browser, new_height, page_height))
                     timer.start()
                     timer.join()
-                
-                page_height = browser.execute_script("return document.body.scrollHeight")
+
+                page_height = browser.execute_script(
+                    "return document.body.scrollHeight")
                 scroll_page(browser, 0, page_height)
 
                 # Iterate over all cards and get the information

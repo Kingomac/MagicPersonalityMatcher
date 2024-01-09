@@ -39,7 +39,6 @@ def scrape_to_db():
 
 
 if __name__ == "__main__":
-    print("pollllllllaaaaaaaaaaaaaaaaaaaaaaaaaaas")
     try:
         scrape_to_db()
     except Exception as e:
