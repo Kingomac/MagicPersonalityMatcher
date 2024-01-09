@@ -1,12 +1,13 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.staticfiles import StaticFiles
-from .controllers import series,personality,characters,examples
+from .controllers import series, personality, characters, examples
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 origins = [
     "https://magic-personality-matcher.vercel.app/",
+    "http://fronted:3000",
     "http://localhost:3000",
     "http://localhost:3001",
     "http://localhost:8000",

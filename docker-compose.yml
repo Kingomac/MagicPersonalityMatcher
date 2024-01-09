@@ -1,5 +1,27 @@
 version: '3'
 services:
+  backend:
+    build:
+      dockerfile: ./backend/Dockerfile
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/usr/src/app
+    depends_on:
+      - mysql
+    networks:
+      - winxnet
+  frontend:
+    build:
+      dockerfile: ./frontend/Dockerfile
+      context: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - winxnet
   mysql:
     image: mysql:latest
     environment:
